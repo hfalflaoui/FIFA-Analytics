@@ -1,0 +1,62 @@
+<template>
+    <!-- team360View.html -->
+    <template if:true={teamData}>
+        <div class="slds-box slds-theme_default">
+        <section class="slds-card slds-m-around_medium">
+            <header class="slds-card__header">
+                <div class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_medium">{teamData.team.Name} 360° Overview</h2>
+                    </div>
+                </div>
+            </header>
+
+            <div class="slds-card__body slds-card__body_inner">
+                <!-- Team Stats Section -->
+                <section class="slds-box slds-theme_default slds-p-around_small">
+                    <p>Wins: {teamData.team.Wins__c} | Losses: {teamData.team.Losses__c} | Draws: {teamData.team.Draws__c}</p>
+                    <p>Goals For: {teamData.team.Goals_For__c} | Goals Against: {teamData.team.Goals_Against__c}</p>
+                </section>
+
+                <!-- Recent Matches Section -->
+                <section class="slds-m-top_medium">
+                    <h3 class="slds-text-heading_small">Recent Matches</h3>
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <template for:each={teamData.recentMatchesMapped} for:item="match">
+                            <div key={match.Id} class="slds-col slds-size_1-of-1 slds-box slds-theme_shade slds-m-around_x-small">
+                                <p>
+                                    <c-date-component date-value={match.MatchDate}></c-date-component> - Opponent: {match.Opponent} | Winner: {match.Winner}
+                                </p>
+                            </div>
+                        </template>
+                    </div>
+                </section>
+
+                <!-- Upcoming Matches Section -->
+                <section class="slds-m-top_medium">
+                    <h3 class="slds-text-heading_small">Upcoming Matches</h3>
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <template for:each={teamData.upcomingMatchesMapped} for:item="match">
+                            <div key={match.Id} class="slds-col slds-size_1-of-1 slds-box slds-theme_default slds-m-around_x-small">
+                                <p>
+                                    <c-date-component date-value={match.MatchDate}></c-date-component> - Opponent: {match.Opponent}
+                                </p>
+                            </div>
+                        </template>
+                    </div>
+                </section>
+            </div>
+        </section>
+        </div>
+    </template>
+
+    <template if:false={teamData}>
+        <div class="slds-align_absolute-center slds-m-top_large">
+            <div class="slds-spinner slds-spinner_medium slds-spinner_brand" role="status">
+                <span class="slds-assistive-text">Loading team data...</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Report Summary" icon-name="standard:report">
+        <template if:true={summaryData}>
+            <div class="slds-m-around_medium">
+                <template for:each={summaryData} for:item="item">
+                    <p key={item.key}>
+                        <strong>{item.label}:</strong> {item.value}
+                    </p>
+                </template>
+            </div>
+        </template>
+        <template if:true={error}>
+            <p class="slds-text-color_error">{error}</p>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,18 @@
+<template>
+   <div class="slds-box slds-theme_default"> 
+    <div><h1>FIFA World Cup 2022</h1></div>
+    <div class="bracket">
+        <template for:each={stages} for:item="stage">
+            <div key={stage.name} class="round">
+                <h2 class="stage-name">{stage.name}</h2>
+                <template for:each={stage.matches} for:item="match">
+                    <div key={match.id} class="match-box">
+                        <p class="team">{match.team1} <span class="score">{match.score1}</span></p>
+                        <p class="team">{match.team2} <span class="score">{match.score2}</span></p>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+    </div>
+</template>
